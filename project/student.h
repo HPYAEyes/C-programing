@@ -5,7 +5,7 @@
 #include <cassert>
 #include <string>
 using namespace std;
-#define MAXSIZE 100;
+#define MAXSIZE 100
 
 typedef struct Course {
 	char cNumber[10];
@@ -50,14 +50,14 @@ int getStudent(StudentList L, int i, Student &e) {
 }
 
 // 查询某个学生在顺序表中的位置
-int locateStudent(StudentList L, Student e) {
-	for (int i = 0; i < L.length; i++) {
-		if (L.elem[i] == e) {
-			return i+1;
-		}
-	}
-	return 0;
-}
+//int locateStudent(StudentList L, Student e) {
+//	for (int i = 0; i < L.length; i++) {
+//		if (L.elem[i] == e) {
+//			return i+1;
+//		}
+//	}
+//	return 0;
+//}
 
 // 插入单个学生信息
 int insertStudent(StudentList &L, int i, Student e) {
