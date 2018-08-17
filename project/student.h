@@ -1,20 +1,23 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <fstream>
-#include <cassert>
 #include <string>
 using namespace std;
 #define MAXSIZE 100
 
-typedef struct Course {
+typedef struct{
 	char cNumber[10];
+	char sNumber[10];
 	char cName[10];
 	int point;
-	Course *next;
-}Course, *CourseList;
+}Course;
 
-typedef struct Student {
+typedef struct CNode {
+	Course data;
+	CNode *next;
+}CNode, *CourseList;
+
+typedef struct {
 	char number[10];
 	char name[10];
 	char gender[10];
@@ -30,6 +33,7 @@ typedef struct {
 	int length;
 }StudentList;
 
+CNode *p;
 // 初始化学生顺序表
 int initStudentList(StudentList &L) {
 	L.elem = new Student[MAXSIZE];
@@ -87,5 +91,54 @@ int deleteStudent(StudentList &L, int i) {
 		L.elem[j - 1] = L.elem[j];
 	}
 	--L.length;
+	return 1;
+} 
+
+// 初始化课程表
+int initCourseList (CourseList &L) {
+	L = new CNode;
+	L->next = NULL;
+	return 1;
+}
+
+// 获取某个课程信息
+int getCourse(CourseList L, int i, Course &e) {
+	p = L->next;
+	int j = 1;
+	while(p && j < i) {
+		p = p->next;
+		++j;
+	}
+	if (!p || j > i) {
+		return -1;
+	}
+	e = p->data;
+	return 1;
+} 
+
+// 查找课程名为xxx的信息
+CNode *locateElem (CourseList L, Course e) {
+	p = L->next;
+	while (p && p->data != e) {
+		p = p->next;
+	}
+	return p;
+} 
+
+// 插入某个课程 
+int insertCourse(CourseList &L, int i, Course e) {
+	p = L;
+	int j = 0;
+	while (p && (j < i - 1)) {
+		p = p->next;
+		++j;
+	}
+	if (!p || j > i - 1) {
+		return -1
+	}
+	s = new CNode;
+	s->data = e;
+	s->next = p->next;
+	p->next = s;
 	return 1;
 } 

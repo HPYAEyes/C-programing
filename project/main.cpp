@@ -9,10 +9,13 @@ using namespace std;
 void readTxt(string file);
 int main () {
 	StudentList stuList;
+	CourseList *courseList;
 	FILE *fp1, *fp2;
 	char str[100];
 	int choose;
 //	readTxt("d:\\test.txt");
+	initStudentList(stuList);
+	initCourseList(courseList);
 	do {
 		cout<<"****************************************"<<endl;
 		cout<<"1--------------创建"<<endl;
@@ -28,7 +31,6 @@ int main () {
 		cin>>choose;
 		switch(choose) {
 			case 1:
-				initStudentList(stuList);
 				Student stu;
 				cout<<"请输入学号："<<endl;
 				cin>>stu.number;
@@ -46,19 +48,30 @@ int main () {
 				cin>>stu.mobile;
 				cout<<"请输入住址："<<endl;
 				cin>>stu.address;
-				insertStudent(stuList, 0, stu);
-				Student stu2;
-				getStudent(stuList, 0, stu2);
+				insertStudent(stuList, stuList.length+1, stu);
 				system("CLS");
 				cout<<"创建成功！"<<endl;
-				cout<<"学号:"<<stu2.number<<endl; 
-				cout<<"姓名:"<<stu2.name<<endl; 
-				cout<<"性别:"<<stu2.gender<<endl; 
-				cout<<"生日:"<<stu2.birth<<endl; 
-				cout<<"生源地:"<<stu2.from<<endl; 
-				cout<<"政治面貌:"<<stu2.face<<endl; 
-				cout<<"手机号:"<<stu2.mobile<<endl; 
-				cout<<"住址:"<<stu2.address<<endl; 
+				break;
+			case 2:
+				if (stuList.length == 0) {
+					cout<<"暂无学生信息！"<<endl;
+					break;
+				} else {
+					cout<<"学号|姓名|性别|生日|生源地|政治面貌|手机号|住址"<<endl;
+				}
+				for (int i = 0; i < stuList.length; i++) {
+					cout<<stuList.elem[i].number<<"|";
+					cout<<stuList.elem[i].name<<"|";
+					cout<<stuList.elem[i].gender<<"|";
+					cout<<stuList.elem[i].birth<<"|";
+					cout<<stuList.elem[i].from<<"|";
+					cout<<stuList.elem[i].face<<"|";
+					cout<<stuList.elem[i].mobile<<"|";
+					cout<<stuList.elem[i].address<<endl;
+				}
+				break;
+			case 3:
+				
 				
 		} 
 	} while(choose != 9);
