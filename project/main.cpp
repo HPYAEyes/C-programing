@@ -31,71 +31,82 @@ int main () {
 		cin>>choose;
 		switch(choose) {
 			case 1:
-				Student stu;
-				cout<<"请输入学号："<<endl;
-				cin>>stu.number;
-				cout<<"请输入姓名："<<endl;
-				cin>>stu.name;
-				cout<<"请输入性别："<<endl;
-				cin>>stu.gender;
-				cout<<"请输入生日："<<endl;
-				cin>>stu.birth;
-				cout<<"请输入生源地："<<endl;
-				cin>>stu.from;
-				cout<<"请输入政治面貌："<<endl;
-				cin>>stu.face;
-				cout<<"请输入手机号："<<endl;
-				cin>>stu.mobile;
-				cout<<"请输入住址："<<endl;
-				cin>>stu.address;
-				insertStudent(stuList, stuList.length+1, stu);
-				system("CLS");
-				cout<<"创建成功！"<<endl;
+				{
+					Student stu;
+					cout<<"请输入学号："<<endl;
+					cin>>stu.number;
+					cout<<"请输入姓名："<<endl;
+					cin>>stu.name;
+					cout<<"请输入性别："<<endl;
+					cin>>stu.gender;
+					cout<<"请输入生日："<<endl;
+					cin>>stu.birth;
+					cout<<"请输入生源地："<<endl;
+					cin>>stu.from;
+					cout<<"请输入政治面貌："<<endl;
+					cin>>stu.face;
+					cout<<"请输入手机号："<<endl;
+					cin>>stu.mobile;
+					cout<<"请输入住址："<<endl;
+					cin>>stu.address;
+					int item = stuList.length + 1;
+					insertStudent(stuList, item, stu);
+					initCourseList(stuList.elem[item-1].head);
+					system("CLS");
+					cout<<"创建成功！"<<endl;
+				}
 				break;
 			case 2:
-				if (stuList.length == 0) {
-					cout<<"暂无学生信息！"<<endl;
-					break;
-				} else {
-					cout<<"学号|姓名|性别|生日|生源地|政治面貌|手机号|住址"<<endl;
-				}
-				for (int i = 0; i < stuList.length; i++) {
-					cout<<stuList.elem[i].number<<"|";
-					cout<<stuList.elem[i].name<<"|";
-					cout<<stuList.elem[i].gender<<"|";
-					cout<<stuList.elem[i].birth<<"|";
-					cout<<stuList.elem[i].from<<"|";
-					cout<<stuList.elem[i].face<<"|";
-					cout<<stuList.elem[i].mobile<<"|";
-					cout<<stuList.elem[i].address<<endl;
+				{
+				
+					if (stuList.length == 0) {
+						cout<<"暂无学生信息！"<<endl;
+						break;
+					} else {
+						cout<<"学号|姓名|性别|生日|生源地|政治面貌|手机号|住址"<<endl;
+					}
+					for (int i = 0; i < stuList.length; i++) {
+						cout<<stuList.elem[i].number<<"|";
+						cout<<stuList.elem[i].name<<"|";
+						cout<<stuList.elem[i].gender<<"|";
+						cout<<stuList.elem[i].birth<<"|";
+						cout<<stuList.elem[i].from<<"|";
+						cout<<stuList.elem[i].face<<"|";
+						cout<<stuList.elem[i].mobile<<"|";
+						cout<<stuList.elem[i].address<<endl;
+					}
 				}
 				break;
 			case 3:
-//				Student stu1;
-//				getStudent(stuList, 2, stu1);
-//				int i;
-//				i = locateStudent(stuList, stu1);
-//				cout<<i<<endl;
-				Course crs;
-				char sNumber[10];
-				int location;
-				cout<<"请输入学号："<<endl;
-				cin>>sNumber;
-				location = locateStudent(stuList, sNumber);
-				if (location == 0) {
-					 cout<<"没有该学生！"<<endl;
-					 break;
+				{
+					char sNumber[10];
+					int location;
+					cout<<"请输入学号："<<endl;
+					cin>>sNumber;
+					location = locateStudent(stuList, sNumber);
+					if (location == 0) {
+						 cout<<"没有该学生！"<<endl;
+						 break;
+					}
+					createCourse(stuList.elem[location-1].head);
+					cout<<"添加成功！"<<endl;
 				}
-				cout<<"请输入课程号："<<endl;
-				cin>>crs.cNumber;
-				cout<<"请输入课程名："<<endl;
-				cin>>crs.cName;
-				cout<<"请输入成绩："<<endl;
-				cin>>crs.point;
-				insertCourse(stuList.elem[location-1].head, 1, crs);
-				cout<<stuList.elem[location-1].head->data.point<<endl;
-				cout<<"添加成功！"<<endl;
 				break;
+			case 4:
+				{
+					char sNumber[10];
+					int location;
+					cout<<"请输入学号："<<endl;
+					cin>>sNumber;
+					location = locateStudent(stuList, sNumber);
+					if (location == 0) {
+						 cout<<"没有该学生！"<<endl;
+						 break;
+					}
+					travelCourse(stuList.elem[location-1].head);
+				}
+				break;
+			
 				
 		} 
 	} while(choose != 9);
