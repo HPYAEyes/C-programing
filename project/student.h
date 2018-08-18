@@ -1,19 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <string>
+#include <string.h>
 using namespace std;
 #define MAXSIZE 100
 
 typedef struct{
 	char cNumber[10];
-	char sNumber[10];
 	char cName[10];
 	int point;
 }Course;
 
 typedef struct CNode {
 	Course data;
+	int length;
 	CNode *next;
 }CNode, *CourseList;
 
@@ -26,7 +26,7 @@ typedef struct {
 	char face[10];
 	char mobile[11];
 	char address[30];
-	Course *head;
+	CNode *head;
 }Student;
 typedef struct {
 	Student *elem;
@@ -53,15 +53,15 @@ int getStudent(StudentList L, int i, Student &e) {
 	return 1;
 }
 
-// 查询某个学生在顺序表中的位置
-//int locateStudent(StudentList L, Student e) {
-//	for (int i = 0; i < L.length; i++) {
-//		if (L.elem[i] == e) {
-//			return i+1;
-//		}
-//	}
-//	return 0;
-//}
+// 根据学号查询某个学生在顺序表中的位置
+int locateStudent(StudentList L, char sNumber[10]) {
+	for (int i = 0; i < L.length; i++) {
+		if (strcmp(L.elem[i].number, sNumber) == 0) {
+			return i+1;
+		}
+	}
+	return 0;
+}
 
 // 插入单个学生信息
 int insertStudent(StudentList &L, int i, Student e) {
@@ -98,6 +98,7 @@ int deleteStudent(StudentList &L, int i) {
 int initCourseList (CourseList &L) {
 	L = new CNode;
 	L->next = NULL;
+	L->length = 0;
 	return 1;
 }
 
@@ -116,10 +117,10 @@ int getCourse(CourseList L, int i, Course &e) {
 	return 1;
 } 
 
-// 查找课程名为xxx的信息
+// 查找课程为xxx的信息
 CNode *locateElem (CourseList L, Course e) {
 	p = L->next;
-	while (p && p->data != e) {
+	while (p && (strcmp(p->data.cNumber, e.cNumber) != 0)) {
 		p = p->next;
 	}
 	return p;
@@ -127,6 +128,7 @@ CNode *locateElem (CourseList L, Course e) {
 
 // 插入某个课程 
 int insertCourse(CourseList &L, int i, Course e) {
+	CNode *s;
 	p = L;
 	int j = 0;
 	while (p && (j < i - 1)) {
@@ -134,11 +136,12 @@ int insertCourse(CourseList &L, int i, Course e) {
 		++j;
 	}
 	if (!p || j > i - 1) {
-		return -1
+		return -1;
 	}
 	s = new CNode;
 	s->data = e;
 	s->next = p->next;
 	p->next = s;
+	L->length++;
 	return 1;
 } 

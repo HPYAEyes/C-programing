@@ -9,7 +9,7 @@ using namespace std;
 void readTxt(string file);
 int main () {
 	StudentList stuList;
-	CourseList *courseList;
+	CourseList courseList;
 	FILE *fp1, *fp2;
 	char str[100];
 	int choose;
@@ -71,25 +71,49 @@ int main () {
 				}
 				break;
 			case 3:
-				
+//				Student stu1;
+//				getStudent(stuList, 2, stu1);
+//				int i;
+//				i = locateStudent(stuList, stu1);
+//				cout<<i<<endl;
+				Course crs;
+				char sNumber[10];
+				int location;
+				cout<<"请输入学号："<<endl;
+				cin>>sNumber;
+				location = locateStudent(stuList, sNumber);
+				if (location == 0) {
+					 cout<<"没有该学生！"<<endl;
+					 break;
+				}
+				cout<<"请输入课程号："<<endl;
+				cin>>crs.cNumber;
+				cout<<"请输入课程名："<<endl;
+				cin>>crs.cName;
+				cout<<"请输入成绩："<<endl;
+				cin>>crs.point;
+				insertCourse(stuList.elem[location-1].head, 1, crs);
+				cout<<stuList.elem[location-1].head->data.point<<endl;
+				cout<<"添加成功！"<<endl;
+				break;
 				
 		} 
 	} while(choose != 9);
 	return 0;
 }
-void readTxt(string file)
-{
-    ifstream infile; 
-    infile.open(file.data());   //将文件流对象与文件连接起来 
-    assert(infile.is_open());   //若失败,则输出错误消息,并终止程序运行 
-
-    char c;
-    infile >> noskipws;
-    while (!infile.eof())
-    {
-        infile>>c;
-        cout<<c;
-
-    }
-    infile.close();             //关闭文件输入流 
-}
+//void readTxt(string file)
+//{
+//    ifstream infile; 
+//    infile.open(file.data());   //将文件流对象与文件连接起来 
+//    assert(infile.is_open());   //若失败,则输出错误消息,并终止程序运行 
+//
+//    char c;
+//    infile >> noskipws;
+//    while (!infile.eof())
+//    {
+//        infile>>c;
+//        cout<<c;
+//
+//    }
+//    infile.close();             //关闭文件输入流 
+//}
