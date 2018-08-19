@@ -6,8 +6,8 @@ using namespace std;
 #define MAXSIZE 100
 
 typedef struct CNode {
-	int cNumber;
-	char cName[10];
+	char cNumber[10];
+	char cName[20];
 	int point;
 	int length;
 	struct CNode *next;
@@ -17,10 +17,10 @@ typedef struct {
 	char number[10];
 	char name[10];
 	char gender[10];
-	char birth[8];
+	char birth[10];
 	char from[10];
 	char face[10];
-	char mobile[11];
+	char mobile[15];
 	char address[30];
 	CNode *head;
 }Student;
@@ -40,7 +40,7 @@ int initCourseList (CourseList &L) {
 }
 
 // 获取某个课程信息
-int getCourse(CourseList L, int i, int &num, char name[10], int &score) {
+int getCourse(CourseList L, int i, char num[10], char name[20], int &score) {
 	CNode *p;
 	p = L->next;
 	int j = 1;
@@ -58,21 +58,21 @@ int getCourse(CourseList L, int i, int &num, char name[10], int &score) {
 } 
 
 // 根据课程号查找课程信息
-CNode *locateElem (CourseList L, int num) {
+CNode *locateElem (CourseList L, char num[10]) {
 	CNode *p;
 	p = L->next;
-	while (p && num == p->cNumber) {
+	while (p && (strcmp(num, p->cNumber) == 0)) {
 		p = p->next;
 	}
 	return p;
 } 
 
 // 插入某个课程 
-int insertCourse(CourseList &L, int i, int num, char name[10], int score) {
+int insertCourse(CourseList &L, int i) {
 	CNode *p;
 	CNode *s;
 	p = L;
-	int j = 0;
+	int j = 0, item = 1;
 	while (p && (j < i - 1)) {
 		p = p->next;
 		++j;
@@ -80,13 +80,20 @@ int insertCourse(CourseList &L, int i, int num, char name[10], int score) {
 	if (!p || j > i - 1) {
 		return -1;
 	}
-	s = new CNode;
-	strcpy(s->cName,name);
-	s->cNumber = num;
-	s->point = score;
-	s->next = p->next;
-	p->next = s;
-	L->length++;
+	while(item) {
+		s = new CNode;
+		cout<<"请输入课程号："<<endl;
+		cin>>s->cNumber;
+		cout<<"请输入课程名："<<endl;
+		cin>>s->cName;
+		cout<<"请输入成绩："<<endl;
+		cin>>s->point;
+		s->next = p->next;
+		p->next = s;
+		L->length++;
+		cout<<"按1继续输入，否则按0退出"<<endl;
+		cin>>item;
+	}
 	return 1;
 } 
 
@@ -94,8 +101,10 @@ int insertCourse(CourseList &L, int i, int num, char name[10], int score) {
 void createCourse(CourseList &L) {
 	int i = 1;
 	CNode *p;
-	L = new CNode;
-	L->next = NULL;
+	if (initCourseList(L) != 1) {
+		cout<<"初始化课程链表失败！"<<endl; 
+		return;
+	}
 	while(i) {
 		p = new CNode;
 		cout<<"请输入课程号："<<endl;
@@ -106,6 +115,7 @@ void createCourse(CourseList &L) {
 		cin>>p->point;
 		p->next = L->next;
 		L->next = p;
+		L->length++;
 		cout<<"按1继续输入，否则按0退出"<<endl;
 		cin>>i;
 		
@@ -117,6 +127,7 @@ void travelCourse(CourseList L) {
 	CNode *p = L;
 	if (L->next == NULL) {
 		cout<<"该学生还没有课程信息"<<endl;
+		return;
 	} else {
 		cout<<"课程号|课程名|成绩"<<endl;
 	}
@@ -125,6 +136,22 @@ void travelCourse(CourseList L) {
 		cout<<p->cNumber<<"|"<<p->cName<<"|"<<p->point<<endl;
 	}
 }
+// 统计某学生所有课程的平均成绩
+int countAver(Student stu) {
+	int sum, i = 0;
+	CNode *p = stu.head;
+	if (stu.head->next != NULL) {
+		while(p->next != NULL) {
+			p = p->next;
+			sum += p->point;
+			i++;
+		}
+	} else {
+		cout<<"该学生还没有任何课程！"<<endl;
+		return -1;
+	}
+	return sum/i;
+} 
 
 // 初始化学生顺序表
 int initStudentList(StudentList &L) {
@@ -153,6 +180,41 @@ int locateStudent(StudentList L, char sNumber[10]) {
 		}
 	}
 	return 0;
+}
+
+// 根据姓名查询学生 
+int searchStudentByName(StudentList L, char sName[10]) {
+	for (int i = 0; i < L.length; i++) {
+		if (strcmp(L.elem[i].name, sName) == 0) {
+			return i+1;
+		}
+	}
+	return 0;
+}
+
+// 显示查询到的学生信息 
+void displayStudentInfo(StudentList L, int location) {
+	Student s;
+	getStudent(L, location, s);
+	cout<<"学号|姓名|性别|生日|生源地|政治面貌|手机号|住址|平均成绩"<<endl;
+	cout<<s.number<<" | ";
+	cout<<s.name<<" | ";
+	cout<<s.gender<<" | ";
+	cout<<s.birth<<" | ";
+	cout<<s.from<<" | ";
+	cout<<s.face<<" | ";
+	cout<<s.mobile<<" | ";
+	cout<<s.address<<" | ";
+	int avg = countAver(s);
+	if (avg == -1) {
+		cout<<"暂无"<<endl;
+	} else {
+		cout<<avg<<endl;
+	}
+	travelCourse(s.head);
+	cout<<"请按任意键继续..."<<endl;
+	getch();
+	system("CLS");
 }
 
 // 插入单个学生信息
@@ -187,19 +249,4 @@ int deleteStudent(StudentList &L, int i) {
 	return 1;
 }
 
-// 统计某学生所有课程的平均成绩
-int countAver(Student stu) {
-	int sum, i = 0;
-	CNode *p = stu.head;
-	if (stu.head->next != NULL) {
-		while(p->next != NULL) {
-			p = p->next;
-			sum += p->point;
-			i++;
-		}
-	} else {
-		cout<<"该学生还没有任何课程！"<<endl;
-	}
-	return sum/i;
-} 
 

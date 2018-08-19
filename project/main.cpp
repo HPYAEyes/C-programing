@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <cassert>
+#include <conio.h>
 #include <string>
 #include "student.h"
 using namespace std;
@@ -54,11 +55,12 @@ int main () {
 					initCourseList(stuList.elem[item-1].head);
 					system("CLS");
 					cout<<"创建成功！"<<endl;
+					break;
 				}
-				break;
+				
 			case 2:
 				{
-				
+					system("CLS");
 					if (stuList.length == 0) {
 						cout<<"暂无学生信息！"<<endl;
 						break;
@@ -75,10 +77,12 @@ int main () {
 						cout<<stuList.elem[i].mobile<<"|";
 						cout<<stuList.elem[i].address<<endl;
 					}
+					break;
 				}
-				break;
+				
 			case 3:
 				{
+					system("CLS");
 					char sNumber[10];
 					int location;
 					cout<<"请输入学号："<<endl;
@@ -88,12 +92,18 @@ int main () {
 						 cout<<"没有该学生！"<<endl;
 						 break;
 					}
-					createCourse(stuList.elem[location-1].head);
+					if (stuList.elem[location-1].head->length == 0) {
+						createCourse(stuList.elem[location-1].head);
+					} else {
+						insertCourse(stuList.elem[location-1].head, 1);
+					}				
 					cout<<"添加成功！"<<endl;
+					break;
 				}
-				break;
+			
 			case 4:
 				{
+					system("CLS");
 					char sNumber[10];
 					int location;
 					cout<<"请输入学号："<<endl;
@@ -104,9 +114,75 @@ int main () {
 						 break;
 					}
 					travelCourse(stuList.elem[location-1].head);
+					int aver = countAver(stuList.elem[location-1]);
+					if (aver != -1) {
+						cout<<"平均成绩:"<<endl;
+						cout<<aver<<endl; 
+					}
+					break;
+				}
+			case 5: 
+			{
+				system("CLS");
+				int select;
+				do{
+					cout<<"****************************************"<<endl;
+					cout<<"1--------------根据学号查找"<<endl;
+					cout<<"2--------------根据姓名查找"<<endl;
+					cout<<"0--------------返回上一级"<<endl;
+					cout<<"****************************************"<<endl;
+					cin>>select;
+					if (select == 1) {
+						char sNumber[10];
+						int location;
+						cout<<"请输入学号："<<endl;
+						cin>>sNumber;
+						location = locateStudent(stuList, sNumber);
+						if (location == 0) {
+							cout<<"没有该学生！"<<endl;
+							break;
+						} else {
+							displayStudentInfo(stuList, location);
+						}
+					} else if (select == 2) {
+						char sName[10];
+						int location;
+						cout<<"请输入姓名："<<endl;
+						cin>>sName;
+						location = searchStudentByName(stuList, sName);
+						if (location == 0) {
+							cout<<"没有该学生！"<<endl;
+							break;
+						} else {
+							displayStudentInfo(stuList, location);
+						}
+					}
+				} while (select != 0);
+				break;
+			}
+			case 6:{
+				
+				break;
+			}
+			case 7:{
+				system("CLS");
+				break;
+			}
+			case 8:{
+				char sNumber[10];
+				int location;
+				cout<<"请输入学号："<<endl;
+				cin>>sNumber;
+				location = locateStudent(stuList, sNumber);
+				if (location == 0) {
+					cout<<"没有该学生！"<<endl;
+					break;
+				} else {
+					deleteStudent(stuList, location);
+					cout<<"删除成功！"<<endl;
 				}
 				break;
-			
+			}
 				
 		} 
 	} while(choose != 9);
