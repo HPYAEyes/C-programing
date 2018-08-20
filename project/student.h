@@ -272,18 +272,34 @@ int deleteStudent(StudentList &L, int i) {
 }
 
 // ¸ù¾ÝÑ§ºÅÅÅÐò 
-void sortByStudentNumber (char sNum[][10], int len) {
-	char temp[100];
-	for (int i = 0; i < len; i++) {
-		for (int j = i + 1; j < len; j++) {
-			if (strcmp(sNum[i], sNum[j]) > 0) {
-				strcpy(temp, sNum[i]);
-				strcpy(sNum[i], sNum[j]);
-				strcpy(sNum[j], temp);
+void sortByStudentNumber (StudentList &L) {
+	Student temp;
+	for (int i = 0; i < L.length; i++) {
+		for (int j = i + 1; j < L.length; j++) {
+			if (strcmp(L.elem[i].number, L.elem[j].number) > 0) {
+//				strcpy(temp, sNum[i]);
+				temp = L.elem[i];
+				L.elem[i] = L.elem[j];
+				L.elem[j] = temp;
+//				strcpy(sNum[i], sNum[j]);
+//				strcpy(sNum[j], temp);
 			}
 		}
 	}
 }
+//void sortByStudentNumber (StudentList &L) {
+//	int i, j;
+//	for (i = 2; i <= L.length; i++) {
+//		if (strcmp(L.elem[i].number, L.elem[i-1].number) < 0) {
+//			L.elem[0] = L.elem[i];
+//			L.elem[i] = L.elem[i - 1];
+//			for (j = i - 2; strcmp(L.elem[i].number, L.elem[i-1].number) < 0 ; j--) {
+//				L.elem[j + 1] = L.elem[j];
+//			}
+//			L.elem[j + 1] = L.elem[0];
+//		}
+//	}
+//}
 void sortByAver(int arr[]) {
 	
 }

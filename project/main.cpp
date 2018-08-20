@@ -32,8 +32,8 @@ int main () {
 						system("CLS");
 						break;
 					}
-					fp1 = fopen("d:\\student.txt", "r");
-					fp2 = fopen("d:\\course.txt", "r");
+					fp1 = fopen("student.txt", "r");
+					fp2 = fopen("course.txt", "r");
 					system("CLS");
 					if (fp1 == NULL || fp2 == NULL) {
 						cout<<"文件读取失败!"<<endl;
@@ -187,22 +187,22 @@ int main () {
 					cin>>select;
 					if (select == 1) {
 						system("CLS");
-						char sNum[100][10], temp[100];
+//						char sNum[100][10], temp[100];
+//						for (int i = 0; i < stuList.length; i++) {
+//							strcpy(sNum[i],stuList.elem[i].number);
+//						}
+//						sortByStudentNumber(sNum, stuList.length); 
+						sortByStudentNumber(stuList);
 						for (int i = 0; i < stuList.length; i++) {
-							strcpy(sNum[i],stuList.elem[i].number);
-						}
-						sortByStudentNumber(sNum, stuList.length); 
-						for (int i = 0; i < stuList.length; i++) {
-							int location = locateStudent(stuList, sNum[i]);
-							if (location != 0) {
-								displayStudentInfo(stuList, location);
-								cout<<endl<<endl;
-							} 
+							displayStudentInfo(stuList, i);
+							cout<<endl<<endl;
 						}
 						system("pause");
 						system("CLS");
 					} else if (select == 2) {
 						// TODO 根据平均成绩排序 
+						int point[100];
+						
 						system("pause");
 						system("CLS");
 					}
