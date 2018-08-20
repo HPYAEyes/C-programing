@@ -268,4 +268,20 @@ int deleteStudent(StudentList &L, int i) {
 	return 1;
 }
 
+// ¸ù¾ÝÑ§ºÅÅÅÐò 
+void sortByStudentNumber (char sNum[][10], int len) {
+	char temp[100];
+	for (int i = 0; i < len; i++) {
+		for (int j = i + 1; j < len; j++) {
+			if (strcmp(sNum[i], sNum[j]) > 0) {
+				strcpy(temp, sNum[i]);
+				strcpy(sNum[i], sNum[j]);
+				strcpy(sNum[j], temp);
+			}
+		}
+	}
+}
+void sortByAver(int arr[]) {
+	
+}
 

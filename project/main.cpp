@@ -51,6 +51,8 @@ int main () {
 					fclose(fp1);
 					fclose(fp2);
 					cout<<"创建成功！"<<endl;
+					system("pause");
+					system("CLS");
 					break;
 				}
 				
@@ -80,6 +82,8 @@ int main () {
 					location = locateStudent(stuList, sNumber);
 					if (location == 0) {
 						 cout<<"没有该学生！"<<endl;
+						 system("pause");
+						 system("CLS");
 						 break;
 					}
 					if (stuList.elem[location-1].head->length == 0) {
@@ -88,6 +92,8 @@ int main () {
 						insertCourse(stuList.elem[location-1].head, 1);
 					}				
 					cout<<"添加成功！"<<endl;
+					system("pause");
+					system("CLS");
 					break;
 				}
 			
@@ -101,6 +107,8 @@ int main () {
 					location = locateStudent(stuList, sNumber);
 					if (location == 0) {
 						 cout<<"没有该学生！"<<endl;
+						 system("pause");
+						 system("CLS");
 						 break;
 					}
 					travelCourse(stuList.elem[location-1].head);
@@ -108,6 +116,8 @@ int main () {
 					if (aver != -1) {
 						cout<<"平均成绩:"<<endl;
 						cout<<aver<<endl; 
+						system("pause");
+						system("CLS");
 					}
 					break;
 				}
@@ -130,6 +140,8 @@ int main () {
 						location = locateStudent(stuList, sNumber);
 						if (location == 0) {
 							cout<<"没有该学生！"<<endl;
+							system("pause");
+							system("CLS");
 							break;
 						} else {
 							displayStudentInfo(stuList, location);
@@ -155,7 +167,37 @@ int main () {
 				break;
 			}
 			case 6:{
-				
+				system("CLS");
+				int select;
+				do{
+					cout<<"****************************************"<<endl;
+					cout<<"1--------------根据学号排序"<<endl;
+					cout<<"2--------------根据平均成绩排序"<<endl;
+					cout<<"0--------------返回上一级"<<endl;
+					cout<<"****************************************"<<endl;
+					cin>>select;
+					if (select == 1) {
+						system("CLS");
+						char sNum[100][10], temp[100];
+						for (int i = 0; i < stuList.length; i++) {
+							strcpy(sNum[i],stuList.elem[i].number);
+						}
+						sortByStudentNumber(sNum, stuList.length); 
+						for (int i = 0; i < stuList.length; i++) {
+							int location = locateStudent(stuList, sNum[i]);
+							if (location != 0) {
+								displayStudentInfo(stuList, location);
+								cout<<endl<<endl;
+							} 
+						}
+						system("pause");
+						system("CLS");
+					} else if (select == 2) {
+						// TODO 根据平均成绩排序 
+						system("pause");
+						system("CLS");
+					}
+				} while (select != 0);
 				break;
 			}
 			case 7:{
@@ -181,6 +223,8 @@ int main () {
 				insertStudent(stuList, item, stu);
 				system("CLS");
 				cout<<"插入成功！"<<endl;
+				system("pause");
+				system("CLS");
 				break;
 			}
 			case 8:{
@@ -191,10 +235,14 @@ int main () {
 				location = locateStudent(stuList, sNumber);
 				if (location == 0) {
 					cout<<"没有该学生！"<<endl;
+					system("pause");
+					system("CLS");
 					break;
 				} else {
 					deleteStudent(stuList, location);
 					cout<<"删除成功！"<<endl;
+					system("pause");
+					system("CLS");
 				}
 				break;
 			}
