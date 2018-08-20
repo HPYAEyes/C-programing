@@ -149,6 +149,8 @@ void travelCourse(CourseList L) {
 	CNode *p = L;
 	if (L->next == NULL) {
 		cout<<"该学生还没有课程信息"<<endl;
+		system("pause");
+		system("CLS");
 		return;
 	} else {
 		cout<<"课程号|课程名|成绩"<<endl;
@@ -157,6 +159,7 @@ void travelCourse(CourseList L) {
 		p = p->next;
 		cout<<p->cNumber<<"|"<<p->cName<<"|"<<p->point<<endl;
 	}
+	
 }
 // 统计某学生所有课程的平均成绩
 int countAver(Student stu) {

@@ -8,7 +8,7 @@ int main () {
 	StudentList stuList;
 	FILE *fp1, *fp2;
 	char str[100];
-	int choose;
+	int choose, fileFlag = 0;
 	initStudentList(stuList);
 	do {
 		cout<<"****************************************"<<endl;
@@ -26,6 +26,12 @@ int main () {
 		switch(choose) {
 			case 1:
 				{
+					if (fileFlag == 1) {
+						cout<<"您已经创建过学生信息了！请不要重复操作！"<<endl;
+						system("pause");
+						system("CLS");
+						break;
+					}
 					fp1 = fopen("d:\\student.txt", "r");
 					fp2 = fopen("d:\\course.txt", "r");
 					system("CLS");
@@ -51,6 +57,7 @@ int main () {
 					fclose(fp1);
 					fclose(fp2);
 					cout<<"创建成功！"<<endl;
+					fileFlag = 1;
 					system("pause");
 					system("CLS");
 					break;
@@ -61,6 +68,8 @@ int main () {
 					system("CLS");
 					if (stuList.length == 0) {
 						cout<<"暂无学生信息！"<<endl;
+						system("pause");
+						system("CLS");
 						break;
 					}
 					for (int i = 0; i < stuList.length; i++) {
