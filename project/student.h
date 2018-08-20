@@ -169,7 +169,6 @@ int countAver(Student stu) {
 			i++;
 		}
 	} else {
-		cout<<"该学生还没有任何课程！"<<endl;
 		return -1;
 	}
 	return sum/i;
@@ -218,24 +217,23 @@ int searchStudentByName(StudentList L, char sName[10]) {
 void displayStudentInfo(StudentList L, int location) {
 	Student s;
 	getStudent(L, location, s);
-	cout<<"学号|姓名|性别|生日|生源地|政治面貌|手机号|住址|平均成绩"<<endl;
-	cout<<s.number<<" | ";
+	cout<<"  学号  | 姓名 | 性别 |  生日  | 生源地 |政治面貌|  手机号  | 住址 | 平均成绩 "<<endl;
+	cout<<s.number<<" |";
 	cout<<s.name<<" | ";
 	cout<<s.gender<<" | ";
 	cout<<s.birth<<" | ";
 	cout<<s.from<<" | ";
-	cout<<s.face<<" | ";
-	cout<<s.mobile<<" | ";
-	cout<<s.address<<" | ";
+	cout<<s.face<<"| ";
+	cout<<s.mobile<<"| ";
+	cout<<s.address<<"|";
 	int avg = countAver(s);
 	if (avg == -1) {
 		cout<<"暂无"<<endl;
+		cout<<"该学生还没有课程信息"<<endl;
 	} else {
 		cout<<avg<<endl;
+		travelCourse(s.head);
 	}
-	travelCourse(s.head);
-	system("pause");
-	system("CLS");
 }
 
 // 插入单个学生信息

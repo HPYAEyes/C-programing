@@ -1,20 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
-#include <fstream>
-#include <cassert>
-#include <conio.h>
 #include <string>
 #include "student.h"
 using namespace std;
 int main () {
 	StudentList stuList;
-	CourseList courseList;
 	FILE *fp1, *fp2;
 	char str[100];
 	int choose;
 	initStudentList(stuList);
-	initCourseList(courseList);
 	do {
 		cout<<"****************************************"<<endl;
 		cout<<"1--------------创建"<<endl;
@@ -65,19 +60,13 @@ int main () {
 					if (stuList.length == 0) {
 						cout<<"暂无学生信息！"<<endl;
 						break;
-					} else {
-						cout<<"学号|姓名|性别|生日|生源地|政治面貌|手机号|住址"<<endl;
 					}
 					for (int i = 0; i < stuList.length; i++) {
-						cout<<stuList.elem[i].number<<"|";
-						cout<<stuList.elem[i].name<<"|";
-						cout<<stuList.elem[i].gender<<"|";
-						cout<<stuList.elem[i].birth<<"|";
-						cout<<stuList.elem[i].from<<"|";
-						cout<<stuList.elem[i].face<<"|";
-						cout<<stuList.elem[i].mobile<<"|";
-						cout<<stuList.elem[i].address<<endl;
+						displayStudentInfo(stuList, i+1);
+						cout<<endl<<endl;
 					}
+					system("pause");
+					system("CLS");
 					break;
 				}
 				
@@ -144,6 +133,8 @@ int main () {
 							break;
 						} else {
 							displayStudentInfo(stuList, location);
+							system("pause");
+							system("CLS");
 						}
 					} else if (select == 2) {
 						char sName[10];
@@ -156,6 +147,8 @@ int main () {
 							break;
 						} else {
 							displayStudentInfo(stuList, location);
+							system("pause");
+							system("CLS");
 						}
 					}
 				} while (select != 0);
