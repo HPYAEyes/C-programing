@@ -32,8 +32,9 @@ int main () {
 			case 1:
 				{
 					fp1 = fopen("d:\\student.txt", "r");
+					fp2 = fopen("d:\\course.txt", "r");
 					system("CLS");
-					if (fp1 == NULL) {
+					if (fp1 == NULL || fp2 == NULL) {
 						cout<<"文件读取失败!"<<endl;
 						exit(-1);
 					} else {
@@ -42,7 +43,18 @@ int main () {
 							fscanf(fp1, "%s %s %s %s %s %s %s %s", s.number, s.name, s.gender, s.birth, s.from, s.face, s.mobile, s.address);
 							insertStudent(stuList, stuList.length+1, s);
 						}
+						while(!feof(fp2)) {
+							char sNum[10], cNum[10], cName[20];
+							int score, location;
+							fscanf(fp2, "%s %s %s %d", sNum, cNum, cName, &score);
+							location = locateStudent(stuList, sNum);
+							if (location != 0) {
+								addCourse(stuList.elem[location-1].head, 1, cNum, cName, score);
+							}
+						}
 					}
+					fclose(fp1);
+					fclose(fp2);
 					cout<<"创建成功！"<<endl;
 					break;
 				}

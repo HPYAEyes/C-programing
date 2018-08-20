@@ -96,6 +96,28 @@ int insertCourse(CourseList &L, int i) {
 	}
 	return 1;
 } 
+// 添加课程 
+int addCourse(CourseList &L, int i, char num[10], char name[20], int score) {
+	CNode *p;
+	CNode *s;
+	p = L;
+	int j = 0, item = 1;
+	while (p && (j < i - 1)) {
+		p = p->next;
+		++j;
+	}
+	if (!p || j > i - 1) {
+		return -1;
+	}
+	s = new CNode;
+	strcpy(s->cNumber, num);
+	strcpy(s->cName, name);
+	s->point = score;
+	s->next = p->next;
+	p->next = s;
+	L->length++;
+	return 1;
+} 
 
 // 创建课程信息
 void createCourse(CourseList &L) {
@@ -212,8 +234,7 @@ void displayStudentInfo(StudentList L, int location) {
 		cout<<avg<<endl;
 	}
 	travelCourse(s.head);
-	cout<<"请按任意键继续..."<<endl;
-	getch();
+	system("pause");
 	system("CLS");
 }
 
