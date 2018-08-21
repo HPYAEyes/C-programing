@@ -187,22 +187,20 @@ int main () {
 					cin>>select;
 					if (select == 1) {
 						system("CLS");
-//						char sNum[100][10], temp[100];
-//						for (int i = 0; i < stuList.length; i++) {
-//							strcpy(sNum[i],stuList.elem[i].number);
-//						}
-//						sortByStudentNumber(sNum, stuList.length); 
 						sortByStudentNumber(stuList);
 						for (int i = 0; i < stuList.length; i++) {
-							displayStudentInfo(stuList, i);
+							displayStudentInfo(stuList, i+1);
 							cout<<endl<<endl;
 						}
 						system("pause");
 						system("CLS");
 					} else if (select == 2) {
-						// TODO 根据平均成绩排序 
-						int point[100];
-						
+						system("CLS");
+						sortByAver(stuList);
+						for (int i = 0; i < stuList.length; i++) {
+							displayStudentInfo(stuList, i+1);
+							cout<<endl<<endl;
+						}
 						system("pause");
 						system("CLS");
 					}

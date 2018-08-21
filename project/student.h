@@ -163,7 +163,7 @@ void travelCourse(CourseList L) {
 }
 // 统计某学生所有课程的平均成绩
 int countAver(Student stu) {
-	int sum, i = 0;
+	int sum = 0, i = 0;
 	CNode *p = stu.head;
 	if (stu.head->next != NULL) {
 		while(p->next != NULL) {
@@ -174,7 +174,7 @@ int countAver(Student stu) {
 	} else {
 		return -1;
 	}
-	return sum/i;
+	return sum / i;
 } 
 
 // 初始化学生顺序表
@@ -277,30 +277,29 @@ void sortByStudentNumber (StudentList &L) {
 	for (int i = 0; i < L.length; i++) {
 		for (int j = i + 1; j < L.length; j++) {
 			if (strcmp(L.elem[i].number, L.elem[j].number) > 0) {
-//				strcpy(temp, sNum[i]);
 				temp = L.elem[i];
 				L.elem[i] = L.elem[j];
 				L.elem[j] = temp;
-//				strcpy(sNum[i], sNum[j]);
-//				strcpy(sNum[j], temp);
 			}
 		}
 	}
 }
-//void sortByStudentNumber (StudentList &L) {
-//	int i, j;
-//	for (i = 2; i <= L.length; i++) {
-//		if (strcmp(L.elem[i].number, L.elem[i-1].number) < 0) {
-//			L.elem[0] = L.elem[i];
-//			L.elem[i] = L.elem[i - 1];
-//			for (j = i - 2; strcmp(L.elem[i].number, L.elem[i-1].number) < 0 ; j--) {
-//				L.elem[j + 1] = L.elem[j];
-//			}
-//			L.elem[j + 1] = L.elem[0];
-//		}
-//	}
-//}
-void sortByAver(int arr[]) {
-	
+
+// 根据平均成绩排序 
+void sortByAver(StudentList &L) {
+	Student temp;
+	int fAver = 0, sAver = 0;
+	for (int i = 0; i < L.length; i++) { 
+		fAver = countAver(L.elem[i]);
+		for (int j = i + 1; j < L.length; j++) {
+			sAver = countAver(L.elem[j]);
+			if (fAver < sAver) {
+				temp = L.elem[i];
+				L.elem[i] = L.elem[j];
+				L.elem[j] = temp;
+				fAver = sAver;
+			}
+		}
+	}
 }
 
