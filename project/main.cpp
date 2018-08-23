@@ -7,10 +7,10 @@ using namespace std;
 int main () {
 	StudentList stuList;
 	FILE *fp1, *fp2;
-	char str[100];
 	int choose, fileFlag = 0;
 	initStudentList(stuList);
 	do {
+		system("CLS");
 		cout<<"****************************************"<<endl;
 		cout<<"1--------------创建"<<endl;
 		cout<<"2--------------显示"<<endl;
@@ -173,11 +173,18 @@ int main () {
 						}
 					}
 				} while (select != 0);
+				system("CLS");
 				break;
 			}
 			case 6:{
 				system("CLS");
 				int select;
+				if (stuList.length == 0) {
+					cout<<"当前没有学生信息！"<<endl;
+					system("pause");
+					system("CLS");
+					break;
+				}
 				do{
 					cout<<"****************************************"<<endl;
 					cout<<"1--------------根据学号排序"<<endl;
@@ -205,6 +212,7 @@ int main () {
 						system("CLS");
 					}
 				} while (select != 0);
+				system("CLS");
 				break;
 			}
 			case 7:{
@@ -252,8 +260,7 @@ int main () {
 					system("CLS");
 				}
 				break;
-			}
-				
+			}		
 		} 
 	} while(choose != 9);
 	return 0;

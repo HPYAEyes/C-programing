@@ -57,16 +57,6 @@ int getCourse(CourseList L, int i, char num[10], char name[20], int &score) {
 	return 1;
 } 
 
-// 根据课程号查找课程信息
-CNode *locateElem (CourseList L, char num[10]) {
-	CNode *p;
-	p = L->next;
-	while (p && (strcmp(num, p->cNumber) == 0)) {
-		p = p->next;
-	}
-	return p;
-} 
-
 // 插入某个课程 
 int insertCourse(CourseList &L, int i) {
 	CNode *p;
