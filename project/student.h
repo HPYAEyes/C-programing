@@ -39,24 +39,6 @@ int initCourseList (CourseList &L) {
 	return 1;
 }
 
-// 获取某个课程信息
-int getCourse(CourseList L, int i, char num[10], char name[20], int &score) {
-	CNode *p;
-	p = L->next;
-	int j = 1;
-	while(p && j < i) {
-		p = p->next;
-		++j;
-	}
-	if (!p || j > i) {
-		return -1;
-	}
-	name = p->cName;
-	num = p->cNumber;
-	score = p->point;
-	return 1;
-} 
-
 // 插入某个课程 
 int insertCourse(CourseList &L, int i) {
 	CNode *p;
