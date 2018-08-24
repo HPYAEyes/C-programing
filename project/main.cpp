@@ -142,6 +142,7 @@ int main () {
 					cout<<"****************************************"<<endl;
 					cin>>select;
 					if (select == 1) {
+						system("CLS");
 						char sNumber[10];
 						int location;
 						cout<<"请输入学号："<<endl;
@@ -158,6 +159,7 @@ int main () {
 							system("CLS");
 						}
 					} else if (select == 2) {
+						system("CLS");
 						char sName[10];
 						int location;
 						cout<<"请输入姓名："<<endl;
@@ -165,6 +167,8 @@ int main () {
 						location = searchStudentByName(stuList, sName);
 						if (location == 0) {
 							cout<<"没有该学生！"<<endl;
+							system("pause");
+							system("CLS");
 							break;
 						} else {
 							displayStudentInfo(stuList, location);
@@ -243,6 +247,7 @@ int main () {
 				break;
 			}
 			case 8:{
+				system("CLS");	
 				char sNumber[10];
 				int location;
 				cout<<"请输入学号："<<endl;
